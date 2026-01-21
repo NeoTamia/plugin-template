@@ -35,10 +35,17 @@ repositories {
         name = "neotamiaPrivate"
         url = uri("https://repo.neotamia.re/private")
     }
+    maven {
+        name = "papermc-repo"
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
 }
 
 dependencies {
+    val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
+
     compileOnly(kotlin("stdlib"))
+    compileOnly(libs.findLibrary("papermcApi").get())
 
     testImplementation(kotlin("test"))
 }
