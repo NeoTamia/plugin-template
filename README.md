@@ -29,7 +29,7 @@
 <h3 align="center">plugin-template</h3>
 
   <p align="center">
-    A template for Kotlin projects. <br />
+    A template for Spigot/Paper plugins. <br />
     <br />
     <a href="https://github.com/NeoTamia/plugin-template/issues">Report Bug</a>
     ·
