@@ -13,7 +13,7 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-group = "re.neotamia.kotlintemplate"
+group = "re.neotamia.plugintemplate"
 version = findProperty("version")!!
 
 repositories {
@@ -153,9 +153,9 @@ project.afterEvaluate {
                     val kebabName = project.name.replace(Regex("(?<=[a-z])(?=[A-Z])"), "-").lowercase()
                     artifactId = kebabName
                     pom {
-                        name = "KotlinTemplate ${project.name}"
-                        description = "Kotlin Template, ${project.name} module."
-                        url = "https://github.com/NeoTamia/kotlin-template"
+                        name = "PluginTemplate ${project.name}"
+                        description = "plugin-template, ${project.name} module."
+                        url = "https://github.com/NeoTamia/plugin-template"
                         developers {
                             developer {
                                 id = "NeoTamia"
@@ -163,9 +163,9 @@ project.afterEvaluate {
                             }
                         }
                         scm {
-                            connection = "scm:git:https://github.com/NeoTamia/kotlin-template.git"
-                            developerConnection = "scm:git:ssh://git@github.com:NeoTamia/kotlin-template.git"
-                            url = "https://github.com/NeoTamia/kotlin-template"
+                            connection = "scm:git:https://github.com/NeoTamia/plugin-template.git"
+                            developerConnection = "scm:git:ssh://git@github.com:NeoTamia/plugin-template.git"
+                            url = "https://github.com/NeoTamia/plugin-template"
                         }
                     }
                     // javadoc & sources jars already added with `components["java"]`
