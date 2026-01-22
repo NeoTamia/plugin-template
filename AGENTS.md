@@ -3,7 +3,7 @@
 All AI agents (Claude, Gemini, Codex, Junie, etc.) working on this project must follow these rules:
 
 ## Technical Context
-- **Stack**: Kotlin 21, Gradle, Multi-module project.
+- **Stack**: Kotlin 2.3, Minecraft plugin (Paper), Gradle, Multi-module project.
 - **Project Structure**: 
   - Modules are located in the `modules/` directory.
   - Core logic resides in `modules/core`.
