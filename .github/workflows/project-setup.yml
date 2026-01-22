@@ -36,8 +36,10 @@ jobs:
           # Sanitize names
           LOW_OWNER=$(echo "$REPO_OWNER" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g')
           LOW_NAME=$(echo "$REPO_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g')
-          # CamelCase: my-repo -> MyRepo
-          CAMEL_NAME=$(echo "$REPO_NAME" | sed -r 's/(^|[_-])([a-z])/\U\2/g' | sed 's/[^a-zA-Z0-9]//g')
+          # camelCase: my-repo -> myRepo
+          CAMEL_NAME=$(echo "$REPO_NAME" | sed -r 's/(^|[_-])([a-z])/\U\2/g' | sed 's/[^a-zA-Z0-9]//g' | sed 's/^./\l&/')
+          # PascalCase: my-repo -> MyRepo
+          PASCAL_NAME=$(echo "$REPO_NAME" | sed -r 's/(^|[_-])([a-z])/\U\2/g' | sed 's/[^a-zA-Z0-9]//g')
           
           echo "Setting up project for $REPO_OWNER/$REPO_NAME"
           echo "Package: re.$LOW_OWNER.$LOW_NAME"
@@ -48,7 +50,8 @@ jobs:
               if grep -qI . "$f"; then
                   sed -i "s/re\.neotamia\.plugintemplate/re.$LOW_OWNER.$LOW_NAME/g" "$f"
                   sed -i "s/plugin-template/$REPO_NAME/g" "$f"
-                  sed -i "s/PluginTemplate/$CAMEL_NAME/g" "$f"
+                  sed -i "s/PluginTemplate/$PASCAL_NAME/g" "$f"
+                  sed -i "s/pluginTemplate/$CAMEL_NAME/g" "$f"
                   sed -i "s/Plugin Template/$REPO_NAME/g" "$f"
                   sed -i "s/plugintemplate-build/$LOW_NAME-build/g" "$f"
               fi
@@ -64,7 +67,7 @@ jobs:
           done
           
           # 3. Rename PluginTemplatePlugin.kt
-          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/$CAMEL_NAMEPlugin.kt"
+          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/${CAMEL_NAME}Plugin.kt"
           
           # 4. Rename directories to match new package
           find . -type d -path "*/re/neotamia/plugintemplate" | while read -r dir; do
