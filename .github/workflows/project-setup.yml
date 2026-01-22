@@ -63,7 +63,10 @@ jobs:
               fi
           done
           
-          # 3. Rename directories to match new package
+          # 3. Rename PluginTemplatePlugin.kt
+          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/$CAMEL_NAMEPlugin.kt"
+          
+          # 4. Rename directories to match new package
           find . -type d -path "*/re/neotamia/plugintemplate" | while read -r dir; do
               base_path=$(echo "$dir" | sed 's|/re/neotamia/plugintemplate$||')
               new_parent="$base_path/re/$LOW_OWNER"
@@ -73,11 +76,8 @@ jobs:
               rmdir "$(dirname "$dir")" 2>/dev/null || true
           done
           
-          # 4. Rename plugintemplate-build.gradle.kts
+          # 5. Rename plugintemplate-build.gradle.kts
           mv buildSrc/src/main/kotlin/plugintemplate-build.gradle.kts "buildSrc/src/main/kotlin/$LOW_NAME-build.gradle.kts"
-          
-          # 5. Rename PluginTemplatePlugin.kt
-          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/$CAMEL_NAMEPlugin.kt"
 
       - name: Commit changes
         if: steps.check.outputs.initialized == 'false'
