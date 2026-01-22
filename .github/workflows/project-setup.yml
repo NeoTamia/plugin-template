@@ -67,7 +67,7 @@ jobs:
           done
           
           # 3. Rename PluginTemplatePlugin.kt
-          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/${CAMEL_NAME}Plugin.kt"
+          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/${PASCAL_NAME}Plugin.kt"
           
           # 4. Rename directories to match new package
           find . -type d -path "*/re/neotamia/plugintemplate" | while read -r dir; do
