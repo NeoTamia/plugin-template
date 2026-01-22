@@ -21,7 +21,7 @@ jobs:
       - name: Check if already initialized
         id: check
         run: |
-          if grep -q "re.neotamia.plugintemplate" buildSrc/src/main/kotlin/neotamia-build.gradle.kts; then
+          if grep -q "re.neotamia.plugintemplate" buildSrc/src/main/kotlin/plugintemplate-build.gradle.kts; then
             echo "initialized=false" >> $GITHUB_OUTPUT
           else
             echo "initialized=true" >> $GITHUB_OUTPUT
@@ -56,7 +56,7 @@ jobs:
           rm files.txt
           
           # 2. Replace Owner only in specific files to avoid breaking external actions
-          files_to_replace_owner="README.md CONTRIBUTING.md buildSrc/src/main/kotlin/neotamia-build.gradle.kts settings.gradle.kts"
+          files_to_replace_owner="README.md CONTRIBUTING.md buildSrc/src/main/kotlin/plugintemplate-build.gradle.kts settings.gradle.kts"
           for f in $files_to_replace_owner; do
               if [ -f "$f" ]; then
                   sed -i "s/NeoTamia/$REPO_OWNER/g" "$f"
@@ -73,8 +73,8 @@ jobs:
               rmdir "$(dirname "$dir")" 2>/dev/null || true
           done
           
-          # 4. Rename neotamia-build.gradle.kts
-          mv buildSrc/src/main/kotlin/neotamia-build.gradle.kts "buildSrc/src/main/kotlin/$LOW_NAME-build.gradle.kts"
+          # 4. Rename plugintemplate-build.gradle.kts
+          mv buildSrc/src/main/kotlin/plugintemplate-build.gradle.kts "buildSrc/src/main/kotlin/$LOW_NAME-build.gradle.kts"
           
           # 5. Rename PluginTemplatePlugin.kt
           mv "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/CAMEL_NAMEPlugin.kt
