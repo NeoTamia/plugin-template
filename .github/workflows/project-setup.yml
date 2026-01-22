@@ -77,7 +77,7 @@ jobs:
           mv buildSrc/src/main/kotlin/plugintemplate-build.gradle.kts "buildSrc/src/main/kotlin/$LOW_NAME-build.gradle.kts"
           
           # 5. Rename PluginTemplatePlugin.kt
-          mv "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/CAMEL_NAMEPlugin.kt
+          mv modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/PluginTemplatePlugin.kt "modules/core/src/main/kotlin/re/neotamia/plugintemplate/core/$CAMEL_NAMEPlugin.kt"
 
       - name: Commit changes
         if: steps.check.outputs.initialized == 'false'
