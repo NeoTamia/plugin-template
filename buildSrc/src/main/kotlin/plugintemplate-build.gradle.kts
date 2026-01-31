@@ -13,7 +13,11 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-group = "re.neotamia.plugintemplate"
+val baseGroup = "re.mineraiders.plugintemplate"
+group = when {
+    project.path.startsWith(":modules:core") -> "$baseGroup.core"
+    else -> baseGroup
+}
 version = findProperty("version")!!
 
 repositories {
@@ -112,7 +116,9 @@ tasks.build {
     finalizedBy(copyJars)
 }
 
-tasks.named<Jar>("jar") {
+tasks.withType<Jar> {
+    val moduleName = project.path.removePrefix(":modules:").replace(":", "-")
+    archiveBaseName.set("plugin-template-$moduleName")
     archiveClassifier.set("stripped")
 }
 
