@@ -116,9 +116,13 @@ tasks.build {
     finalizedBy(copyJars)
 }
 
-tasks.withType<Jar> {
-    val moduleName = project.path.removePrefix(":modules:").replace(":", "-")
-    archiveBaseName.set("plugin-template-$moduleName")
+tasks.withType<Jar>().configureEach {
+    val moduleName = project.path.removePrefix(":modules").replace(":", "-")
+    val baseName = if (moduleName == "-" || moduleName.isEmpty()) "plugin-template" else "plugin-template$moduleName"
+    archiveBaseName.set(baseName)
+}
+
+tasks.named<Jar>("jar") {
     archiveClassifier.set("stripped")
 }
 
