@@ -3,5 +3,5 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.modules.pluginTemplateCore)
+    implementation(projects.modules.core)
 }
