@@ -13,12 +13,18 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-val baseGroup = "re.mineraiders.plugintemplate"
+val baseGroup = "re.neotamia.plugintemplate"
 group = when {
     project.path.startsWith(":modules:core") -> "$baseGroup.core"
     else -> baseGroup
 }
 version = findProperty("version")!!
+
+val moduleName = project.path.removePrefix(":modules").replace(":", "-")
+val baseName = if (moduleName == "-" || moduleName.isEmpty()) "PluginTemplate" else "PluginTemplate$moduleName"
+base {
+    archivesName.set(baseName)
+}
 
 repositories {
     mavenCentral()
@@ -116,12 +122,6 @@ tasks.build {
     finalizedBy(copyJars)
 }
 
-tasks.withType<Jar>().configureEach {
-    val moduleName = project.path.removePrefix(":modules").replace(":", "-")
-    val baseName = if (moduleName == "-" || moduleName.isEmpty()) "plugin-template" else "plugin-template$moduleName"
-    archiveBaseName.set(baseName)
-}
-
 tasks.named<Jar>("jar") {
     archiveClassifier.set("stripped")
 }
@@ -167,7 +167,7 @@ project.afterEvaluate {
         publishing {
             publications {
                 create<MavenPublication>("mavenJava") {
-                    val kebabName = project.name.replace(Regex("(?<=[a-z])(?=[A-Z])"), "-").lowercase()
+                    val kebabName = baseName.replace(Regex("(?<=[a-z])(?=[A-Z])"), "-").lowercase()
                     artifactId = kebabName
                     pom {
                         name = "PluginTemplate ${project.name}"
