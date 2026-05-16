@@ -5,7 +5,7 @@
 [versions]
 kotlin = "2.3.21"
 shadow = "9.4.1"
-spotless = "8.4.0"
+spotless = "8.5.1"
 paperweight = "2.0.0-beta.21"
 runPaper = "3.0.2"
 resourceFactory = "1.3.1"
