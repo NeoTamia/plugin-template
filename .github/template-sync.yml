@@ -1,13 +1,8 @@
-# Files copied from this template into repositories created from it.
-# Nested templates keep extra keys/files; after their sync PR is merged
-# they fan out to their own generated repos.
+# Copied into generated plugin repos. They pull this template with GITHUB_TOKEN.
 
-discover: true
-skip_archived: true
+source:
+source_ref:
 prefer_branch: dev
-
-include_repos:
-exclude_repos:
 
 identity:
   extra:
