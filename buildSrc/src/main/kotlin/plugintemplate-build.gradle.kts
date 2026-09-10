@@ -1,5 +1,6 @@
 import com.diffplug.spotless.LineEnding
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar.Companion.shadowJar
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.internal.extensions.stdlib.capitalized
 
@@ -11,6 +12,7 @@ plugins {
     `java-library`
     id("com.gradleup.shadow")
     id("com.diffplug.spotless")
+    id("com.github.ben-manes.versions")
 }
 
 val baseGroup = "re.neotamia.plugintemplate"
@@ -21,7 +23,11 @@ group = when {
 version = findProperty("version")!!
 
 val moduleName = project.path.removePrefix(":modules").replace(":", "-")
+<<<<<<< dest
 val baseName = if (moduleName == "-" || moduleName.isEmpty()) "PluginTemplate" else "PluginTemplate$moduleName"
+=======
+val baseName = if (moduleName == "-" || moduleName.isEmpty()) "plugin-template" else "plugin-template$moduleName"
+>>>>>>> template
 base {
     archivesName.set(baseName)
 }
@@ -29,21 +35,17 @@ base {
 repositories {
     mavenCentral()
     mavenLocal()
-    maven {
+    maven("https://jitpack.io") {
         name = "jitpack"
-        url = uri("https://jitpack.io")
     }
-    maven {
+    maven("https://repo.neotamia.re/releases") {
         name = "neotamiaReleases"
-        url = uri("https://repo.neotamia.re/releases")
     }
-    maven {
+    maven("https://repo.neotamia.re/snapshots") {
         name = "neotamiaSnapshots"
-        url = uri("https://repo.neotamia.re/snapshots")
     }
-    maven {
+    maven("https://repo.neotamia.re/private") {
         name = "neotamiaPrivate"
-        url = uri("https://repo.neotamia.re/private")
     }
     maven {
         name = "papermc-repo"
@@ -97,9 +99,9 @@ spotless {
     }
 }
 
-tasks.withType<ShadowJar> {
-    archiveClassifier.set("")
-}
+// tasks.withType<ShadowJar> {
+//     archiveClassifier.set("")
+// }
 
 val copyJars = tasks.register<Copy>("copyJars") {
     group = "publishing"
@@ -122,9 +124,9 @@ tasks.build {
     finalizedBy(copyJars)
 }
 
-tasks.named<Jar>("jar") {
-    archiveClassifier.set("stripped")
-}
+// tasks.named<Jar>("jar") {
+//     archiveClassifier.set("stripped")
+// }
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
@@ -155,7 +157,7 @@ project.afterEvaluate {
                 maven {
                     var repository = System.getProperty("repository.name", "snapshots")
                     name = "neotamia${repository.capitalized()}"
-                    url = uri("https://repo.neotamia.re/${repository}")
+                    url = uri("https://repo.neotamia.re/$repository")
                     credentials(PasswordCredentials::class) {
                         username = (findProperty("${name}Username") ?: System.getenv("MAVEN_USERNAME")) as String?
                         password = (findProperty("${name}Password") ?: System.getenv("MAVEN_PASSWORD")) as String?

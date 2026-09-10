@@ -3,6 +3,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
+<<<<<<< dest
 kotlin = "2.3.21"
 shadow = "9.4.2"
 spotless = "8.6.0"
@@ -13,11 +14,18 @@ resourceFactory = "1.3.1"
 # project librairies
 ntconfig = "0.1.1"
 papermc = "1.21.11-R0.1-SNAPSHOT"
+=======
+kotlin = "2.4.20"
+shadow = "9.6.1"
+spotless = "8.10.2"
+versionsChecker = "0.61.0"
+>>>>>>> template
 
 [libraries]
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 shadowGradlePlugin = { module = "com.gradleup.shadow:shadow-gradle-plugin", version.ref = "shadow" }
 spotlessGradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+versionCheckerGradlePlugin = { module = "com.github.ben-manes.versions:com.github.ben-manes.versions.gradle.plugin", version.ref = "versionsChecker" }
 
 # project librairies
 ntConfigCore = { module = "re.neotamia.config:ntconfig-core", version.ref = "ntconfig" }
