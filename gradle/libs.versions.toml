@@ -8,7 +8,7 @@ shadow = "9.4.2"
 spotless = "8.6.0"
 paperweight = "2.0.0-beta.21"
 runPaper = "3.0.2"
-resourceFactory = "1.3.1"
+resourceFactory = "1.4.0"
 
 # project librairies
 ntconfig = "0.1.1"
